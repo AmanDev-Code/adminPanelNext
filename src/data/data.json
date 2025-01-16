@@ -22,23 +22,93 @@
     }
   ],
   "activity": {
-    "Month": [120, 200, 300, 250, 350, 400, 320, 300, 360, 390, 420, 450],
-    "Year": [3000, 3200, 3400, 3100, 3600, 3800, 4000, 4200, 4400, 4600, 4800, 5000]
+    "Month": [
+      120,
+      200,
+      300,
+      250,
+      350,
+      400,
+      320,
+      300,
+      360,
+      390,
+      420,
+      450
+    ],
+    "Year": [
+      3000,
+      3200,
+      3400,
+      3100,
+      3600,
+      3800,
+      4000,
+      4200,
+      4400,
+      4600,
+      4800,
+      5000
+    ]
   },
   "userCategory": [
-    { "icon": "👥", "title": "Organizers", "value": "1068" },
-    { "icon": "👥", "title": "Speakers", "value": "868" },
-    { "icon": "🎤", "title": "Sponsors", "value": "490" },
-    { "icon": "🎫", "title": "Attendees", "value": "6748" },
-    { "icon": "🏢", "title": "Venues", "value": "917" },
-    { "icon": "🍴", "title": "Caterers", "value": "572" }
+    {
+      "icon": "👥",
+      "title": "Organizers",
+      "value": "1068"
+    },
+    {
+      "icon": "👥",
+      "title": "Speakers",
+      "value": "868"
+    },
+    {
+      "icon": "🎤",
+      "title": "Sponsors",
+      "value": "490"
+    },
+    {
+      "icon": "🎫",
+      "title": "Attendees",
+      "value": "6748"
+    },
+    {
+      "icon": "🏢",
+      "title": "Venues",
+      "value": "917"
+    },
+    {
+      "icon": "🍴",
+      "title": "Caterers",
+      "value": "572"
+    }
   ],
   "topAreas": [
-    { "name": "Bangalore", "percentage": 48, "color": "#ccffcc" },
-    { "name": "Chennai", "percentage": 32, "color": "#ffce1b" },
-    { "name": "Delhi", "percentage": 29, "color": "#ff2c2c" },
-    { "name": "Jaipur", "percentage": 11, "color": "#FF8DA1" },
-    { "name": "Mumbai", "percentage": 9, "color": "#63C3EE" }
+    {
+      "name": "Bangalore",
+      "percentage": 48,
+      "color": "#ccffcc"
+    },
+    {
+      "name": "Chennai",
+      "percentage": 32,
+      "color": "#ffce1b"
+    },
+    {
+      "name": "Delhi",
+      "percentage": 29,
+      "color": "#ff2c2c"
+    },
+    {
+      "name": "Jaipur",
+      "percentage": 11,
+      "color": "#FF8DA1"
+    },
+    {
+      "name": "Mumbai",
+      "percentage": 9,
+      "color": "#63C3EE"
+    }
   ],
   "topics": [
     {
@@ -73,11 +143,31 @@
     }
   ],
   "leaderboard": [
-    { "name": "Arjun Sharma", "rating": 4, "image": "/1" },
-    { "name": "Priya Iyer", "rating": 3, "image": "/2" },
-    { "name": "Ananya Rao", "rating": 4, "image": "/3" },
-    { "name": "Ravi Kumar", "rating": 4, "image": "/4" },
-    { "name": "Neha Verma", "rating": 3, "image": "/5" },
+    {
+      "name": "Arjun Sharma",
+      "rating": 4,
+      "image": "/1"
+    },
+    {
+      "name": "Priya Iyer",
+      "rating": 3,
+      "image": "/2"
+    },
+    {
+      "name": "Ananya Rao",
+      "rating": 4,
+      "image": "/3"
+    },
+    {
+      "name": "Ravi Kumar",
+      "rating": 4,
+      "image": "/4"
+    },
+    {
+      "name": "Neha Verma",
+      "rating": 3,
+      "image": "/5"
+    }
   ],
   "events": [
     {
@@ -220,7 +310,54 @@
           }
         ]
       }
+    },
+    {
+      "Step1": {
+        "eventName": "aa",
+        "eventCategory": "Virtual",
+        "startDate": "2222-02-22",
+        "startTime": "12:02",
+        "endTime": "11:03",
+        "location": "bangalore",
+        "description": "aaaa"
+      },
+      "Step2": {
+        "bannerImage": "blob:http://localhost:3000/1ecd86a9-e359-4cfa-8fbe-dd1e3a22da39"
+      },
+      "Step3": {
+        "eventType": "Ticketed Event",
+        "ticketName": "phase 1",
+        "ticketPrice": "4000"
+      },
+      "Step4": {
+        "acceptedRequests": [
+          {
+            "id": 1,
+            "name": "Ather",
+            "type": "Sponsors",
+            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRx8FXEAo6hHEDyqZo21qjALhNaODM-gOWYWw&s"
+          },
+          {
+            "id": 5,
+            "name": "Vishwas Mudagal",
+            "type": "Speakers",
+            "image": "https://www.vishwasmudagal.com/wp-content/uploads/2015/03/top-motivational-speaker-vishwas-mudagal.jpg"
+          },
+          {
+            "id": 9,
+            "name": "Pai Vista",
+            "type": "Venue",
+            "image": "https://floodlightz.com/wp-content/uploads/2024/01/pai-vista-1-1.webp"
+          },
+          {
+            "id": 13,
+            "name": "Babai Tiffins",
+            "type": "Food",
+            "image": "https://cdn0.weddingwire.in/vendor/9865/3_2/960/jpg/catering-royal-catering-services-catering-setup-2_15_309865-159057093440061.jpeg"
+          }
+        ]
+      },
+      "eventID": "0LibaewWIh"
     }
   ]
 }
-

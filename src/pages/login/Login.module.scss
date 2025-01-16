@@ -1,0 +1,158 @@
+.loginContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch; /* Ensures both sections stretch to the full height */
+  min-height: 100vh;
+  background-color: #f9faff;
+  font-family: "Poppins", sans-serif;
+
+  .formSection {
+    flex: 1;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end; /* Aligns the form to the right edge */
+    padding: 0 2rem;
+    margin-right: 5%; /* Push the form away from the right edge */
+
+    .formWrapper {
+      width: 100%;
+      max-width: 400px; /* Ensure form doesn't get too wide */
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 2rem;
+
+      span {
+        color: #007bff;
+      }
+    }
+
+    .heading {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #333;
+      line-height: 1.2;
+
+      span {
+        color: #007bff;
+      }
+    }
+
+    .subHeading {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 2rem;
+
+      a {
+        color: #007bff;
+        font-weight: 500;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .formGroup {
+      margin-bottom: 1.5rem;
+
+      label {
+        font-size: 1rem;
+        color: #666;
+        margin-bottom: 0.5rem;
+        display: block;
+      }
+
+      .inputField {
+        display: flex;
+        align-items: center;
+        background-color: #f1f1f1;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 0.75rem 1rem;
+
+        input {
+          flex: 1;
+          border: none;
+          background: none;
+          outline: none;
+          font-size: 1rem;
+        }
+
+        .icon {
+          color: #aaa;
+          cursor: pointer;
+
+          &:hover {
+            color: #007bff;
+          }
+        }
+      }
+    }
+
+    .buttons {
+      display: flex;
+      gap: 1rem;
+
+      button {
+        flex: 1;
+        padding: 0.75rem;
+        font-size: 1rem;
+        border: none;
+        border-radius: 8px;
+        color: #fff;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+
+        &.primary {
+          background-color: #007bff;
+
+          &:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+          }
+        }
+
+        &.secondary {
+          background-color: #ccc;
+
+          &:hover {
+            background-color: #aaa;
+            transform: translateY(-2px);
+          }
+        }
+      }
+    }
+  }
+
+  .imageSection {
+    flex: 1;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100vh;
+      object-fit: cover;
+      mask-image: url('/assets/rounded-corner.svg');
+      -webkit-mask-image: url('/assets/rounded-corner.svg');
+      mask-size: cover;
+      -webkit-mask-size: cover;
+      mask-repeat: no-repeat;
+      -webkit-mask-repeat: no-repeat;
+      mask-position: center;
+      -webkit-mask-position: center;
+    }
+  }
+}
