@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../fromSteps/styles/RequestForm.module.scss";
 import RequestCard from "./RequestCard";
+import Profile from "../../../UserProfiles/Profile";
 
 const mockData = {
   sponsors: [
@@ -14,7 +15,7 @@ const mockData = {
       id: 2,
       name: "Docker",
       type: "Sponsors",
-      image: "https://logos-world.net/wp-content/uploads/2021/02/Docker-Logo-2015-2017.png",
+      image: "https://tech.osteel.me/images/2020/03/04/docker-introduction-01.jpg",
     },
     {
       id: 3,
@@ -26,7 +27,7 @@ const mockData = {
       id: 4,
       name: "Intellicredence",
       type: "Sponsors",
-      image: "https://www.intellicredence.com/assets/images/logo.png",
+      image: "https://www.intellicredence.com/assets/images/logoicon.png",
     },
   ],
   speakers: [
@@ -46,7 +47,7 @@ const mockData = {
       id: 7,
       name: "Vivek Bindra",
       type: "Speakers",
-      image: "https://bbst1.badabusiness.com/wp-content/uploads/2020/04/Best-Motivational-Speaker-In-India.jpg",
+      image: "https://i.pinimg.com/736x/6e/54/21/6e5421d79f810ad7e94666c9b0446868.jpg",
     },
     {
       id: 8,
@@ -114,9 +115,30 @@ interface RequestProps {
 }
 
 const Request: React.FC<RequestProps> = ({ onAccept }) => {
+  const [selectedRequest, setSelectedRequest] = useState<any | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
   const handleAccept = (id: number, name: string, type: string, image: string) => {
-    onAccept({ id, name, type, image }); // Pass image as well
+    onAccept({ id, name, type, image });
   };
+
+  const handleRequestClick = (request: any, category: string) => {
+    setSelectedRequest(request);
+    setSelectedCategory(category);
+  };
+
+  if (selectedRequest) {
+    return (
+      <Profile
+        request={selectedRequest}
+        onBack={() => {
+          setSelectedRequest(null);
+          setSelectedCategory(null);
+        }}
+        requests={mockData[selectedCategory as keyof typeof mockData]}
+      />
+    );
+  }
 
   return (
     <section className={styles.container}>
@@ -131,9 +153,10 @@ const Request: React.FC<RequestProps> = ({ onAccept }) => {
                 <RequestCard
                   name={item.name}
                   type={item.type}
-                  image={item.image} // Pass image prop
-                  onAccept={() => handleAccept(item.id, item.name, item.type, item.image)} // Pass image to onAccept
+                  image={item.image}
+                  onAccept={() => handleAccept(item.id, item.name, item.type, item.image)}
                   onReject={() => console.log(`Rejected request ${item.id}`)}
+                  onClick={() => handleRequestClick(item, key)}
                 />
               </div>
             ))}

@@ -4,8 +4,9 @@ import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import SortIcon from "@mui/icons-material/Sort";
 import styles from "./requestSection.module.scss";
 import RequestCard from "./RequestCard";
+import Profile from "../../UserProfiles/Profile";
 
-const mockData = {
+const requests = {
   sponsors: [
     {
       id: 1,
@@ -49,7 +50,7 @@ const mockData = {
       id: 7,
       name: "Vivek Bindra",
       type: "Speakers",
-      image: "https://bbst1.badabusiness.com/wp-content/uploads/2020/04/Best-Motivational-Speaker-In-India.jpg",
+      image: "https://i.pinimg.com/736x/6e/54/21/6e5421d79f810ad7e94666c9b0446868.jpg",
     },
     {
       id: 8,
@@ -113,120 +114,85 @@ const mockData = {
 };
 
 const Request: React.FC = () => {
-  const [filteredData, setFilteredData] = useState(mockData);
+  const [selectedRequest, setSelectedRequest] = useState<any | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [filteredData, setFilteredData] = useState(requests);
   const [filters, setFilters] = useState({ name: "", type: "" });
   const [filterAnchor, setFilterAnchor] = useState<null | HTMLElement>(null);
   const [sortAnchor, setSortAnchor] = useState<null | HTMLElement>(null);
 
-  const handleFilterClick = (event: React.MouseEvent<HTMLElement>) => {
-    setFilterAnchor(event.currentTarget);
+  const handleRequestClick = (request: any, category: string) => {
+    setSelectedRequest(request);
+    setSelectedCategory(category);
   };
 
-  const handleSortClick = (event: React.MouseEvent<HTMLElement>) => {
-    setSortAnchor(event.currentTarget);
+  const handleBack = () => {
+    setSelectedRequest(null);
+    setSelectedCategory(null);
   };
+
+  const handleFilterClick = (event: React.MouseEvent<HTMLElement>) => setFilterAnchor(event.currentTarget);
+  const handleSortClick = (event: React.MouseEvent<HTMLElement>) => setSortAnchor(event.currentTarget);
 
   const applyFilters = () => {
-    const newFilteredData = {
-      sponsors: mockData.sponsors.filter((item) => {
-        const matchesName =
-          filters.name === "" || item.name.toLowerCase().includes(filters.name.toLowerCase());
-        const matchesType =
-          filters.type === "" || item.type.toLowerCase() === filters.type.toLowerCase();
+    const newFilteredData = Object.keys(requests).reduce((acc, key) => {
+      acc[key] = requests[key as keyof typeof requests].filter((item) => {
+        const matchesName = filters.name === "" || item.name.toLowerCase().includes(filters.name.toLowerCase());
+        const matchesType = filters.type === "" || item.type.toLowerCase() === filters.type.toLowerCase();
         return matchesName && matchesType;
-      }),
-      speakers: mockData.speakers.filter((item) => {
-        const matchesName =
-          filters.name === "" || item.name.toLowerCase().includes(filters.name.toLowerCase());
-        const matchesType =
-          filters.type === "" || item.type.toLowerCase() === filters.type.toLowerCase();
-        return matchesName && matchesType;
-      }),
-      venue: mockData.venue.filter((item) => {
-        const matchesName =
-          filters.name === "" || item.name.toLowerCase().includes(filters.name.toLowerCase());
-        const matchesType =
-          filters.type === "" || item.type.toLowerCase() === filters.type.toLowerCase();
-        return matchesName && matchesType;
-      }),
-      food: mockData.food.filter((item) => {
-        const matchesName =
-          filters.name === "" || item.name.toLowerCase().includes(filters.name.toLowerCase());
-        const matchesType =
-          filters.type === "" || item.type.toLowerCase() === filters.type.toLowerCase();
-        return matchesName && matchesType;
-      }),
-    };
+      });
+      return acc;
+    }, {} as typeof requests);
 
     setFilteredData(newFilteredData);
-    setFilterAnchor(null); // Close the menu after applying filters
+    setFilterAnchor(null);
   };
 
   const sortData = (sortKey: "az" | "za") => {
-    const newSortedData = {
-      sponsors: [...filteredData.sponsors],
-      speakers: [...filteredData.speakers],
-      venue: [...filteredData.venue],
-      food: [...filteredData.food],
-    };
-
-    const sortFn = (a: any, b: any) => {
-      if (sortKey === "az") return a.name.localeCompare(b.name);
-      if (sortKey === "za") return b.name.localeCompare(a.name);
-      return 0;
-    };
-
-    (Object.keys(newSortedData) as Array<keyof typeof newSortedData>).forEach((key) => {
-      newSortedData[key].sort(sortFn);
-    });
+    const newSortedData = Object.keys(filteredData).reduce((acc, key) => {
+      acc[key] = [...filteredData[key as keyof typeof filteredData]].sort((a, b) =>
+        sortKey === "az" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name)
+      );
+      return acc;
+    }, {} as typeof filteredData);
 
     setFilteredData(newSortedData);
     setSortAnchor(null);
   };
 
-  const handleAccept = (id: number) => {
-    console.log(`Accepted request ${id}`);
-  };
-
-  const handleReject = (id: number) => {
-    console.log(`Rejected request ${id}`);
-  };
+  if (selectedRequest) {
+    return <Profile request={selectedRequest} onBack={handleBack} requests={requests[selectedCategory as keyof typeof requests]} />;
+  }
 
   return (
     <section className={styles.container}>
-      {/* <div className={styles.header}> */}
-        {/* <h2 className={styles.title}>Requests</h2> */}
-       
-      {/* </div> */}
-
-      <Menu
-        anchorEl={filterAnchor}
-        open={Boolean(filterAnchor)}
-        onClose={() => setFilterAnchor(null)}
-      >
+      <Menu anchorEl={filterAnchor} open={Boolean(filterAnchor)} onClose={() => setFilterAnchor(null)}>
         <div className={styles.filterMenu}>
           <TextField
             label="Name"
             variant="outlined"
             fullWidth
+            margin="dense"
             value={filters.name}
             onChange={(e) => setFilters({ ...filters, name: e.target.value })}
-            margin="dense"
           />
           <TextField
             label="Type"
             variant="outlined"
             select
             fullWidth
+            margin="dense"
             value={filters.type}
             onChange={(e) => setFilters({ ...filters, type: e.target.value })}
-            margin="dense"
           >
             <MenuItem value="">All</MenuItem>
-            <MenuItem value="Sponsors">Sponsors</MenuItem>
-            <MenuItem value="Speakers">Speakers</MenuItem>
-            <MenuItem value="Venue">Venue</MenuItem>
-            <MenuItem value="Food">Food</MenuItem>
+            {Array.from(new Set(Object.values(requests).flatMap((items) => items.map((item) => item.type)))).map(
+              (type) => (
+                <MenuItem key={type} value={type}>
+                  {type}
+                </MenuItem>
+              )
+            )}
           </TextField>
           <Button variant="contained" onClick={applyFilters}>
             Apply Filters
@@ -234,11 +200,7 @@ const Request: React.FC = () => {
         </div>
       </Menu>
 
-      <Menu
-        anchorEl={sortAnchor}
-        open={Boolean(sortAnchor)}
-        onClose={() => setSortAnchor(null)}
-      >
+      <Menu anchorEl={sortAnchor} open={Boolean(sortAnchor)} onClose={() => setSortAnchor(null)}>
         <MenuItem onClick={() => sortData("az")}>Sort A-Z</MenuItem>
         <MenuItem onClick={() => sortData("za")}>Sort Z-A</MenuItem>
       </Menu>
@@ -248,13 +210,13 @@ const Request: React.FC = () => {
           <div className={styles.sectionHeader}>
             <h3>{key.charAt(0).toUpperCase() + key.slice(1)}</h3>
             <div className={styles.actions}>
-          <IconButton onClick={handleFilterClick}>
-            <FilterAltIcon fontSize="large" />
-          </IconButton>
-          <IconButton onClick={handleSortClick}>
-            <SortIcon fontSize="large" />
-          </IconButton>
-        </div>
+              <IconButton onClick={handleFilterClick}>
+                <FilterAltIcon fontSize="large" />
+              </IconButton>
+              <IconButton onClick={handleSortClick}>
+                <SortIcon fontSize="large" />
+              </IconButton>
+            </div>
           </div>
           <div className={styles.cardsContainer}>
             {value.length > 0 ? (
@@ -264,8 +226,7 @@ const Request: React.FC = () => {
                   name={item.name}
                   type={item.type}
                   image={item.image}
-                  onAccept={() => handleAccept(item.id)}
-                  onReject={() => handleReject(item.id)}
+                  onClick={() => handleRequestClick(item, key)}
                 />
               ))
             ) : (
