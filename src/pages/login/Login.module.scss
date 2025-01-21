@@ -1,132 +1,144 @@
 .loginContainer {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  align-items: stretch; /* Ensures both sections stretch to the full height */
-  min-height: 100vh;
-  background-color: #f9faff;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  background-color: #ffffff; /* White background */
   font-family: "Poppins", sans-serif;
 
   .formSection {
     flex: 1;
-    max-width: 500px;
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: flex-end; /* Aligns the form to the right edge */
-    padding: 0 2rem;
-    margin-right: 5%; /* Push the form away from the right edge */
+    align-items: center;
+    padding: 20px; /* Padding for spacing */
 
     .formWrapper {
       width: 100%;
-      max-width: 400px; /* Ensure form doesn't get too wide */
-    }
+      max-width: 400px; /* Constrained form width */
+      box-sizing: border-box;
 
-    .logo {
-      font-size: 1.8rem;
-      font-weight: bold;
-      color: #333;
-      margin-bottom: 2rem;
+      .logo {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #2c3e50;
+        margin-bottom: 1rem;
 
-      span {
-        color: #007bff;
-      }
-    }
-
-    .heading {
-      font-size: 2.8rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      color: #333;
-      line-height: 1.2;
-
-      span {
-        color: #007bff;
-      }
-    }
-
-    .subHeading {
-      font-size: 1rem;
-      color: #555;
-      margin-bottom: 2rem;
-
-      a {
-        color: #007bff;
-        font-weight: 500;
-        text-decoration: none;
-
-        &:hover {
-          text-decoration: underline;
+        span {
+          color: #fe560f;
         }
       }
-    }
 
-    .formGroup {
-      margin-bottom: 1.5rem;
+      .heading {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: #333;
+        line-height: 1.3;
+      }
 
-      label {
+      .subHeading {
         font-size: 1rem;
-        color: #666;
-        margin-bottom: 0.5rem;
-        display: block;
+        color: #555;
+        margin-bottom: 1.5rem;
       }
 
-      .inputField {
-        display: flex;
-        align-items: center;
-        background-color: #f1f1f1;
-        border: 1px solid #ddd;
-        border-radius: 10px;
-        padding: 0.75rem 1rem;
+      form {
+        .formGroup {
+          margin-bottom: 1.5rem;
 
-        input {
-          flex: 1;
-          border: none;
-          background: none;
-          outline: none;
-          font-size: 1rem;
-        }
+          .inputWrapper {
+            position: relative;
 
-        .icon {
-          color: #aaa;
-          cursor: pointer;
+            input {
+              width: 100%;
+              padding: 0.75rem 1rem;
+              border: 1px solid #ddd;
+              border-radius: 8px;
+              font-size: 1rem;
+              background-color: #f8f9fa;
+              transition: all 0.3s ease;
 
-          &:hover {
-            color: #007bff;
-          }
-        }
-      }
-    }
+              &:focus {
+                border-color: #fe560f;
+                outline: none;
+              }
 
-    .buttons {
-      display: flex;
-      gap: 1rem;
+              &:focus + label,
+              &:not(:placeholder-shown) + label {
+                top: -8px;
+                left: 12px;
+                font-size: 0.75rem;
+                color: #fe560f;
+              }
+            }
 
-      button {
-        flex: 1;
-        padding: 0.75rem;
-        font-size: 1rem;
-        border: none;
-        border-radius: 8px;
-        color: #fff;
-        cursor: pointer;
-        transition: all 0.3s ease-in-out;
+            label {
+              position: absolute;
+              top: 50%;
+              left: 1rem;
+              transform: translateY(-50%);
+              font-size: 1rem;
+              color: #666;
+              pointer-events: none;
+              transition: all 0.3s ease;
+            }
 
-        &.primary {
-          background-color: #007bff;
+            .icon {
+              position: absolute;
+              top: 50%;
+              right: 1rem;
+              transform: translateY(-50%);
+              color: #aaa;
+              cursor: pointer;
 
-          &:hover {
-            background-color: #0056b3;
-            transform: translateY(-2px);
+              &:hover {
+                color: #fe560f;
+              }
+            }
           }
         }
 
-        &.secondary {
-          background-color: #ccc;
+        .buttons {
+          display: flex;
+          justify-content: space-between;
 
-          &:hover {
-            background-color: #aaa;
-            transform: translateY(-2px);
+          .button {
+            flex: 1;
+            padding: 0.8rem 1.2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            &:disabled {
+              background: #ccc;
+              color: #888;
+              cursor: not-allowed;
+            }
+          }
+
+          .primary {
+            background: linear-gradient(to right, #cd470d, #fe560f);
+            color: #fff;
+            margin-left: 1rem;
+
+            &:hover:not(:disabled) {
+              background: linear-gradient(to right, #cd470d, #fe560f);  
+              transform: translateY(-2px);
+            }
+          }
+
+          .secondary {
+            background: #e4e6eb;
+            color: #333;
+
+            &:hover:not(:disabled) {
+              background: #d6d8db;
+              color: #000;
+            }
           }
         }
       }
@@ -135,24 +147,17 @@
 
   .imageSection {
     flex: 1;
-    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    margin: 20px; /* 20px margin on all sides */
+    box-sizing: border-box;
 
     img {
-      width: 100%;
-      height: 100vh;
+      width: 100%; /* Adjusted to fill 50% width of the container */
+      height: calc(100vh - 40px); /* Full height minus top/bottom margin */
       object-fit: cover;
-      mask-image: url('/assets/rounded-corner.svg');
-      -webkit-mask-image: url('/assets/rounded-corner.svg');
-      mask-size: cover;
-      -webkit-mask-size: cover;
-      mask-repeat: no-repeat;
-      -webkit-mask-repeat: no-repeat;
-      mask-position: center;
-      -webkit-mask-position: center;
+      border-radius: 16px; /* Rounded corners for the image */
     }
   }
 }
