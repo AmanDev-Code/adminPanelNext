@@ -1,9 +1,9 @@
-import { Button, InputField, getItem, setItem } from "@/components";
-import { themesSetting } from "@/recoil";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSetRecoilState } from "recoil";
 import { withRouter } from "next/router";
+import { getItem, setItem } from "@/components";
+import { themesSetting } from "@/recoil";
 import { useUser } from "../../components/context/UserContext";
 import styles from "./Login.module.scss";
 
@@ -15,6 +15,7 @@ const defaultValue = {
 const Login = (props: any) => {
   const setTheme = useSetRecoilState(themesSetting);
   const { setUser } = useUser();
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   useEffect(() => {
     const userData = getItem("userdata");
@@ -45,10 +46,8 @@ const Login = (props: any) => {
     mode: "onChange",
     defaultValues: defaultValue,
   });
-  const [password, setPassword] = useState(true);
 
   const onSubmit = async (data: any) => {
-    props.router.push("/userDashboard");
     const userData = {
       userid: "sam",
       username: data.username,
@@ -57,72 +56,76 @@ const Login = (props: any) => {
     };
     setUser(userData);
     setItem("userdata", userData);
+    props.router.push("/userDashboard");
   };
 
   return (
     <div className={styles.loginContainer}>
-  {/* Form Section */}
-  <div className={styles.formSection}>
-    <div className={styles.logo}>
-      Anywhere <span>App</span>
+      <div className={styles.formSection}>
+        <div className={styles.formWrapper}>
+          <div className={styles.logo}>
+           Convene <span>App</span>
+          </div>
+          <h1 className={styles.heading}>Holla, Welcome Back</h1>
+          <p className={styles.subHeading}>
+            Hey, welcome back to your special place
+          </p>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className={styles.formGroup}>
+              <div className={styles.inputWrapper}>
+                <input
+                  id="username"
+                  type="text"
+                  placeholder=" "
+                  {...register("username", { required: true })}
+                />
+                <label htmlFor="username">Email</label>
+              </div>
+              {errors.username && <p className="error">Email is required</p>}
+            </div>
+            <div className={styles.formGroup}>
+              <div className={styles.inputWrapper}>
+                <input
+                  id="password"
+                  type={passwordVisible ? "text" : "password"}
+                  placeholder=" "
+                  {...register("password", { required: true })}
+                />
+                <label htmlFor="password">Password</label>
+                <i
+                  className={`fas ${passwordVisible ? "fa-eye-slash" : "fa-eye"} ${
+                    styles.icon
+                  }`}
+                  onClick={() => setPasswordVisible(!passwordVisible)}
+                ></i>
+              </div>
+              {errors.password && (
+                <p className="error">Password is required</p>
+              )}
+            </div>
+            <div className={styles.buttons}>
+              <button
+                type="button"
+                className={`${styles.button} ${styles.secondary}`}
+              >
+                Switch Method
+              </button>
+              <button
+                type="submit"
+                className={`${styles.button} ${styles.primary}`}
+                disabled={!isDirty || !isValid}
+              >
+                Sign In
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div className={styles.imageSection}>
+        <img src="/assets/login2.jpeg" alt="Login Illustration" />
+      </div>
     </div>
-    <h1 className={styles.heading}>
-      Create new account <span>.</span>
-    </h1>
-    <p className={styles.subHeading}>
-      Already a member? <a href="/login">Log in</a>
-    </p>
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className={styles.formGroup}>
-        <label htmlFor="username">Username</label>
-        <div className={styles.inputField}>
-          <input
-            id="username"
-            type="text"
-            placeholder="Enter your username"
-            {...register("username", { required: true })}
-          />
-          <i className="fas fa-user icon"></i>
-        </div>
-        {errors.username && <p className="error">Username is required</p>}
-      </div>
-      <div className={styles.formGroup}>
-        <label htmlFor="password">Password</label>
-        <div className={styles.inputField}>
-          <input
-            id="password"
-            type={password ? "password" : "text"}
-            placeholder="Enter your password"
-            {...register("password", { required: true })}
-          />
-          <i
-            className={`fas ${password ? "fa-eye-slash" : "fa-eye"} icon`}
-            onClick={() => setPassword(!password)}
-          ></i>
-        </div>
-        {errors.password && <p className="error">Password is required</p>}
-      </div>
-      <div className={styles.buttons}>
-        <button type="button" className="secondary">
-          Change Method
-        </button>
-        <button
-          type="submit"
-          className="primary"
-          disabled={!isDirty || !isValid}
-        >
-          Create Account
-        </button>
-      </div>
-    </form>
-  </div>
-
-  {/* Image Section */}
-  <div className={styles.imageSection}>
-    <img src="/assets/loginimage.jpg" alt="Beautiful Mountain" />
-  </div>
-</div>
-
   );
 };
 

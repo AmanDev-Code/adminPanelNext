@@ -48,7 +48,7 @@ const menu: Array<Menu> = [
   },
   {
     title: "Settings",
-    path: "/settings",
+    path: "/users/organiser/settings/orgSettings",
     icon: "nav-icon fas fa-cog"
   },
 ];

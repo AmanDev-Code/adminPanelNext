@@ -32,6 +32,14 @@
           source: "/eventDetails",
           destination: "/users/nestedpages/organisers-event", // Serve admin dashboard
         },
+        {
+          source: "/userRegister",
+          destination: "/register/userRegister", // Serve admin dashboard
+        },
+        {
+          source: "/orgSettings",
+          destination: "/users/organiser/settings/orgSettings", // Serve admin dashboard
+        },
         // {
         //   source: "/about",
         //   destination: "/adminAbout", // Serve admin about
