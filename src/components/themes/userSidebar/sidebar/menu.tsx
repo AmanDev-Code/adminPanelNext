@@ -36,14 +36,14 @@ const menu: Array<Menu> = [
     //   { title: "Speakers", path: "/users/speakers", icon: "nav-icon fas fa-microphone" },
     // ],
   },
-  {
-    title: "Internal Messaging",
-    path: "/settings",
-    icon: "nav-icon fas fa-cog"
-  },
+  // {
+  //   title: "Internal Messaging",
+  //   path: "/settings",
+  //   icon: "nav-icon fas fa-cog"
+  // },
   {
     title: "Insights",
-    path: "/settings",
+    path: "/users/organiser/insights/insights",
     icon: "nav-icon fas fa-cog"
   },
   {

@@ -1,79 +1,112 @@
 .container {
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 40px;
-    background-color: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    font-family: Arial, sans-serif;
-    color: #000000;
-  }
-  
-  .heading {
-    text-align: left;
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  .subheading {
-    font-size: 1.25rem;
-    font-weight: bold;
-    margin: 30px 0 30px;
-  }
-  
-  .form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .row {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-  }
-  
-  .column {
-    flex: 1;
-  }
-  
-  .label {
-    display: block;
-    font-size: 14px;
-    margin-bottom: 5px;
-    color: #000000;
-  }
-  
-  .input {
-    width: 50%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    font-size: 14px;
-    color: #333;
-  }
-  
-  .input::placeholder {
-    color: #aaa;
-  }
-  
-  .saveButton {
-    width: 30%;
-    padding: 10px;
-    background-color: #4b0082;
-    color: #fff;
-    border: none;
-    border-radius: 20px;
-    font-size: 1rem;
-    cursor: pointer;
-    // text-transform: uppercase;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-    margin-top: 20px;
-  }
-  
-  .saveButton:hover {
-    background-color: #371d57;
-  }
-  
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+  color: #000000;
+}
+
+.heading {
+  text-align: left;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.subheading {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin: 30px 0 30px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.column {
+  flex: 1;
+}
+
+.inputField {
+  position: relative;
+  width: 100%;
+}
+
+.input {
+  width: 50%;
+  padding: 14px 16px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  background-color: #fff;
+  font-size: 1rem;
+  color: #333;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.input::placeholder {
+  color: transparent;
+}
+
+.input:hover {
+  border-color: #aaa;
+}
+
+.input:focus {
+  border-color: #6200ea;
+  box-shadow: 0 0 0 2px rgba(98, 0, 234, 0.2);
+}
+
+.input:focus + .label,
+.input:not(:placeholder-shown) + .label {
+  top: -10px;
+  left: 14px;
+  font-size: 0.85rem;
+  color: #6200ea;
+  padding: 0 4px;
+}
+
+.label {
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  color: #aaa;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.textarea {
+  min-height: 120px;
+  resize: none;
+}
+
+.saveButton {
+  width: 30%;
+  padding: 10px;
+  background-color: #4b0082;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+.saveButton:hover {
+  background-color: #371d57;
+}

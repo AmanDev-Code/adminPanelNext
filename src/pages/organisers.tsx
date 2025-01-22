@@ -7,7 +7,7 @@ import EventsSection from "@/components/UsersComponent/AdminComponent/EventsSect
 import CommunitiesSection from "@/components/UsersComponent/AdminComponent/CommunitiesSection";
 import DeleteAccountButton from "@/components/UsersComponent/AdminComponent/DeleteAccountButton";
 
-import styles from "./MainStyles/organisersPage.module.scss";
+import styles from "./organisersPage.module.scss";
 
 type Organiser = {
   name: string;
