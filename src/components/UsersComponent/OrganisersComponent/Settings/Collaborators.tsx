@@ -3,7 +3,7 @@ import { Button, IconButton, Menu, MenuItem, TextField } from "@mui/material";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import SortIcon from "@mui/icons-material/Sort";
 import styles from "./Collaborators.module.scss";
-import RequestCard from "./CollabCards";
+import CollabCards from "./CollabCards";
 import Profile from "../../UserProfiles/Profile";
 
 const requests = {
@@ -47,6 +47,9 @@ const requests = {
   ],
 };
 
+// Define a type for the keys of the requests object
+type RequestKeys = keyof typeof requests;
+
 const Collaborators: React.FC = () => {
   const [selectedRequest, setSelectedRequest] = useState<any | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -71,7 +74,8 @@ const Collaborators: React.FC = () => {
 
   const applyFilters = () => {
     const newFilteredData = Object.keys(requests).reduce((acc, key) => {
-      acc[key] = requests[key as keyof typeof requests].filter((item) => {
+      const typedKey = key as RequestKeys; // Type assertion
+      acc[typedKey] = requests[typedKey].filter((item) => {
         const matchesName = filters.name === "" || item.name.toLowerCase().includes(filters.name.toLowerCase());
         const matchesType = filters.type === "" || item.type.toLowerCase() === filters.type.toLowerCase();
         return matchesName && matchesType;
@@ -85,7 +89,8 @@ const Collaborators: React.FC = () => {
 
   const sortData = (sortKey: "az" | "za") => {
     const newSortedData = Object.keys(filteredData).reduce((acc, key) => {
-      acc[key] = [...filteredData[key as keyof typeof filteredData]].sort((a, b) =>
+      const typedKey = key as RequestKeys; // Type assertion
+      acc[typedKey] = [...filteredData[typedKey]].sort((a, b) =>
         sortKey === "az" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name)
       );
       return acc;
@@ -165,10 +170,11 @@ const Collaborators: React.FC = () => {
           <div className={styles.cardsContainer}>
             {value.length > 0 ? (
               value.map((item) => (
-                <RequestCard
+                <CollabCards
                   key={item.id}
                   name={item.name}
                   type={item.type}
+                  onAccept={() => alert("Request accepted")}
                   image={item.image}
                   onClick={() => handleRequestClick(item, key)}
                 />
@@ -182,25 +188,27 @@ const Collaborators: React.FC = () => {
 
       {/* Invite a Collaborator Section */}
       <div className={styles.inviteSection}>
-        <h3>Invite a Collaborator</h3>
-        <div className={styles.inviteContainer}>
-          <TextField
-            label="Enter Email ID"
-            variant="outlined"
-            fullWidth
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleSendRequest}
-            className={styles.sendButton}
-          >
-            Send
-          </Button>
-        </div>
-      </div>
+  <h3 className={styles.sectionHeading}>Invite a Collaborator</h3>
+  <div className={styles.inviteContainer}>
+    <div className={styles.formGroup}>
+      <input
+        type="text"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder=" "
+        className={styles.inputField}
+      />
+      <label className={styles.label}>Enter Email ID</label>
+    </div>
+    <button
+      className={styles.sendButton}
+      onClick={handleSendRequest}
+    >
+      Send Invite
+    </button>
+  </div>
+</div>
+
     </section>
   );
 };

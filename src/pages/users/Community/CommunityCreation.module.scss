@@ -1,0 +1,213 @@
+.container {
+    // padding: 20px 50px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .mainContainer {
+    padding: 20px;
+    border-radius: 20px;
+    background: #ffffff;
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .leftSection {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+  
+    .title {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      color: #6200ea;
+    }
+  
+    .formGroup {
+      margin-bottom: 1.5rem;
+  
+      label {
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        display: block;
+        color: #6200ea;
+      }
+  
+      input,
+      select {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 1rem;
+        outline: none;
+  
+        &:focus {
+          border-color: #6200ea;
+          box-shadow: 0 0 0 2px rgba(98, 0, 234, 0.2);
+        }
+      }
+    }
+  
+    .uploadSection {
+        .uploadBox {
+          border: 2px dashed #6200ea;
+          padding: 1rem;
+          text-align: center;
+          cursor: pointer;
+          margin-bottom: 0.5rem;
+          position: relative;
+      
+          label {
+            font-size: 1rem;
+            font-weight: bold;
+            display: block;
+          }
+      
+          p {
+            margin: 0.5rem 0 0;
+            font-size: 0.9rem;
+            color: #333;
+          }
+      
+          input {
+            display: none;
+          }
+      
+          .imagePreviewContainer {
+            position: relative;
+      
+            .coverPreview {
+              width: 100%;
+              height: auto;
+              max-height: 200px;
+              object-fit: cover;
+              border-radius: 8px;
+            }
+      
+            .hoverActions {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background-color: rgba(0, 0, 0, 0.5);
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              gap: 1rem;
+              opacity: 0;
+              transition: opacity 0.3s ease-in-out;
+      
+              .deleteButton,
+              .uploadButton {
+                background: white;
+                border: none;
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                font-size: 1.2rem;
+                color: #6200ea;
+      
+                &:hover {
+                  background: #6200ea;
+                  color: white;
+                }
+      
+                input {
+                  display: none;
+                }
+              }
+            }
+      
+            &:hover .hoverActions {
+              opacity: 1;
+            }
+          }
+        }
+        .uploadHint {
+            font-size: 0.85rem;
+            color: #555;
+          }
+      }
+      
+  }
+  
+  .divider {
+    width: 1px;
+    background-color: #ddd;
+    margin: 0 1rem;
+  }
+  
+  .rightSection {
+    flex: 1;
+  
+    h3 {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #6200ea;
+      margin-bottom: 1rem;
+    }
+  
+    .memberList {
+      list-style: none;
+      padding: 0;
+  
+      li {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+  
+        .memberAvatar {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          overflow: hidden;
+          margin-right: 0.5rem;
+  
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+  
+        .memberDetails {
+          display: flex;
+          flex-direction: column;
+  
+          span:first-child {
+            font-weight: bold;
+            color: #333;
+          }
+  
+          span:last-child {
+            font-size: 0.85rem;
+            color: #999;
+          }
+        }
+      }
+    }
+  }
+  
+  .createButton {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #6200ea;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+  
+    &:hover {
+      background-color: #4e00c4;
+    }
+  }
+  

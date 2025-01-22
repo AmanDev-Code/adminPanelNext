@@ -6,11 +6,11 @@ interface RequestCardProps {
   type: string;
   image: string;
   onAccept: () => void;
-  onReject: () => void;
+  // onReject?: () => void;
   onClick: () => void; // New prop for handling clicks
 }
 
-const RequestCard: React.FC<RequestCardProps> = ({ name, type, image, onAccept, onReject, onClick }) => {
+const CollabCards: React.FC<RequestCardProps> = ({ name, type, image, onAccept, onClick }) => {
   return (
     <div className={styles.card} onClick={onClick}> {/* Click triggers profile view */}
       <div className={styles.innerFlex}>
@@ -37,4 +37,4 @@ const RequestCard: React.FC<RequestCardProps> = ({ name, type, image, onAccept, 
   );
 };
 
-export default RequestCard;
+export default CollabCards;
