@@ -59,7 +59,7 @@ const CommunityCreation: React.FC = () => {
   }
 
   return (
-    <PanelContent headerContent title="Create Community">
+    <PanelContent headerContent title="">
       <div className={styles.container}>
         <div className={styles.mainContainer}>
           {/* Left Section */}

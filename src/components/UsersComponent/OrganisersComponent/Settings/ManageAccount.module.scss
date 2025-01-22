@@ -93,24 +93,29 @@
 
 .toggleContainer {
   display: flex;
-  align-items: center;
   // justify-content: space-between;
-  gap: 40px; /* Maintain a gap of 20px between labels and sliders */
+  align-items: flex-start; /* Aligns labels and toggle container at the top */
   margin: 10px 0;
   font-size: 1rem;
+  gap: 30px; /* Adds space between the labels and the toggle switches */
+}
+
+.labelsContainer {
+  display: flex;
+  flex-direction: column; /* Align labels in a column */
+  gap: 15px; /* Space between each label */
 }
 
 .togglesWrapper {
   display: flex;
-  flex-direction: column; /* Align toggleContainer vertically */
-  gap: 10px; /* Add spacing between toggle containers */
+  flex-direction: column; /* Align toggle switches in a column */
+  gap: 15px; /* Space between each switch */
 }
 
 .switch {
   position: relative;
   width: 40px;
   height: 20px;
-  flex-direction: column;
 
   input {
     opacity: 0;
