@@ -15,10 +15,13 @@ import EventForm from "@/components/Organisers/OrganisersDashboard/EventForm"; /
 import styles from "./settings.module.css";
 import { Box } from "@mui/material";
 import ProfileUpdate from "@/components/Organisers/Settings/ProfileUpdate";
+import Collaborators from "@/components/UsersComponent/OrganisersComponent/Settings/Collaborators";
+import ManageAccount from "@/components/UsersComponent/OrganisersComponent/Settings/ManageAccount";
+import PaymentMethods from "@/components/UsersComponent/OrganisersComponent/Settings/PaymentMethods";
 
 const Settings = () => {
   const [activeTab, setActiveTab] = useState<
-    "Profile Update" | "Interests" | "Collaborators" | "Account Management" | "Payment Methods"
+    "Profile Update" | "Collaborators" | "Account Management" | "Payment Methods"
   >("Profile Update");
   const router = useRouter();
 
@@ -32,10 +35,9 @@ const Settings = () => {
 
   const tabs = [
     { name: "Profile Update", component: <ProfileUpdate /> },
-    { name: "Interests", component: <PreviousEvent /> },
-    { name: "Collaborators", component: <Request /> },
-    { name: "Account Management", component: <Recommendations /> },
-    { name: "Payment Methods", component: <Recommendations /> },
+    { name: "Collaborators", component: <Collaborators /> },
+    { name: "Account Management", component: <ManageAccount /> },
+    { name: "Payment Methods", component: <PaymentMethods /> },
   ];
 
   const activeTabIndex = tabs.findIndex((tab) => tab.name === activeTab);

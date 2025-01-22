@@ -1,6 +1,6 @@
 .step1Container {
   max-width: 100%; /* Centered, modern layout */
-  margin: 70px;
+  margin: 40px;
   padding: 30px;
   background: #ffffff; /* Cleaner white background */
   border-radius: 20px; /* Softer corners */
@@ -8,19 +8,19 @@
 }
 
 .heading {
-  font-size: 2rem; /* Increased size */
-  font-weight: 800; /* Bolder weight */
+  font-size: 1.5rem; /* Increased size */
+  font-weight: bold; /* Bolder weight */
   margin-bottom: 40px; /* Adjusted for balanced spacing */
-  color: #4b0082;
+  color: #000000;
   text-align: left; /* Consistent alignment */
 }
 
 .subheading {
-  font-size: 25px; /* Increased size */
-  font-weight: 700; /* Bolder weight */
+  font-size: 1rem; /* Increased size */
+  font-weight: bold; /* Bolder weight */
   margin-top: 25px; /* Smaller gap above subheading */
   margin-bottom: 15px; /* Larger gap below subheading for clarity */
-  color: #4b0082;
+  color: #000000;
 }
 
 .form {
