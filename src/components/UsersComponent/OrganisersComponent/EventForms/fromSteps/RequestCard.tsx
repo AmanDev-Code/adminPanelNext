@@ -7,11 +7,12 @@ interface RequestCardProps {
   image: string;
   onAccept: () => void;
   onReject: () => void;
+  onClick: () => void; // New prop for handling clicks
 }
 
-const RequestCard: React.FC<RequestCardProps> = ({ name, type, image, onAccept, onReject }) => {
+const RequestCard: React.FC<RequestCardProps> = ({ name, type, image, onAccept, onReject, onClick }) => {
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={onClick}> {/* Click triggers profile view */}
       <div className={styles.innerFlex}>
         {/* Image Section */}
         <div className={styles.imageContainer}>
@@ -27,10 +28,10 @@ const RequestCard: React.FC<RequestCardProps> = ({ name, type, image, onAccept, 
 
         {/* Buttons Section */}
         <div className={styles.buttonsFlex}>
-          <button className={styles.acceptButton} onClick={onAccept}>
+          <button className={styles.acceptButton} onClick={(e) => { e.stopPropagation(); onAccept(); }}>
             Add
           </button>
-          <button className={styles.rejectButton} onClick={onReject}>
+          <button className={styles.rejectButton} onClick={(e) => { e.stopPropagation(); onReject(); }}>
             View More
           </button>
         </div>
