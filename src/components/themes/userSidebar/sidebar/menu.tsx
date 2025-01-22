@@ -25,7 +25,7 @@ const menu: Array<Menu> = [
   },
   {
     title: "Community",
-    path: "/users/Community/CommunityCreation",
+    path: "/users/Community/CommunityList",
     icon: "nav-icon fas fa-users",
     // children: [
     //   { title: "Attendees", path: "/users/attendees", icon: "nav-icon fas fa-user" },

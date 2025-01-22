@@ -1,0 +1,61 @@
+.communityList {
+    padding: 20px;
+    font-family: "Poppins", sans-serif;
+  
+    h2 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #6200ea;
+      margin-bottom: 20px;
+    }
+  
+    .communityGrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+  
+      .communityCard,
+      .createCommunityCard {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+        &:hover {
+          transform: scale(1.05);
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+  
+        img {
+          width: 100%;
+          height: 150px;
+          object-fit: cover;
+        }
+  
+        p {
+          text-align: center;
+          padding: 10px;
+          font-size: 1rem;
+          font-weight: 500;
+          color: #333;
+        }
+      }
+  
+      .createCommunityCard {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f9f9f9;
+        border: 2px dashed #6200ea;
+  
+        .plusIcon {
+          font-size: 3rem;
+          font-weight: bold;
+          color: #6200ea;
+        }
+      }
+    }
+  }
+  

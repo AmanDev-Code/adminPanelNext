@@ -40,6 +40,14 @@
           source: "/orgSettings",
           destination: "/users/organiser/settings/orgSettings", // Serve admin dashboard
         },
+        {
+          source: "/community",
+          destination: "/users/Community/CommunityFeed", // Serve admin dashboard
+        },
+        {
+          source: "/create-community",
+          destination: "/users/Community/CommunityCreation", // Serve admin dashboard
+        },
         // {
         //   source: "/about",
         //   destination: "/adminAbout", // Serve admin about

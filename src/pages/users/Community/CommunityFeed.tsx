@@ -45,8 +45,29 @@ const CommunityFeed: React.FC = () => {
     { name: "Ashutosh Chandra Jha", time: "9:41 AM", profilePic: "https://media.licdn.com/dms/image/v2/D5603AQEp2hOwS1PKwg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1728817685180?e=2147483647&v=beta&t=0fFgoAnbaI8nHF2kjZt46AKGvxDmsk-pFcLlmUkyZhU" },
   ]);
 
+  // Handlers for interactive buttons
+  const handleLike = (postId: number) => {
+    setPosts((prev) =>
+      prev.map((post) =>
+        post.id === postId ? { ...post, likes: post.likes + 1 } : post
+      )
+    );
+  };
+
+  const handleShare = (postId: number) => {
+    console.log(`Post ${postId} shared!`);
+  };
+
+  const handleComment = (postId: number) => {
+    console.log(`Open comments for post ${postId}`);
+  };
+
+  const handlePostOptionClick = (option: string) => {
+    console.log(`Selected option: ${option}`);
+  };
+
   return (
-    <PanelContent headerContent title="Create Community">
+    <PanelContent headerContent title="Community Feed">
     <div className={styles.communityFeed}>
       <div className={styles.leftSection}>
         {/* Posting Section */}
@@ -58,10 +79,32 @@ const CommunityFeed: React.FC = () => {
           />
           <textarea placeholder="What's happening?" />
           <div className={styles.postingActions}>
-            <FaImage className={styles.icon} />
-            <FaSmile className={styles.icon} />
-            <FaPollH className={styles.icon} />
-            <FaCalendarAlt className={styles.icon} />
+            <div className={styles.iconGroup}>
+              <button
+                onClick={() => handlePostOptionClick("image")}
+                className={styles.actionButton}
+              >
+                <FaImage />
+              </button>
+              <button
+                onClick={() => handlePostOptionClick("emoji")}
+                className={styles.actionButton}
+              >
+                <FaSmile />
+              </button>
+              <button
+                onClick={() => handlePostOptionClick("poll")}
+                className={styles.actionButton}
+              >
+                <FaPollH />
+              </button>
+              <button
+                onClick={() => handlePostOptionClick("calendar")}
+                className={styles.actionButton}
+              >
+                <FaCalendarAlt />
+              </button>
+            </div>
             <button className={styles.postButton}>
               Post <IoMdSend />
             </button>
@@ -92,9 +135,24 @@ const CommunityFeed: React.FC = () => {
                   />
                 )}
                 <div className={styles.postActions}>
-                  <span>💬 {post.comments}</span>
-                  <span>🔄 {post.shares}</span>
-                  <span>❤️ {post.likes}</span>
+                  <button
+                    onClick={() => handleComment(post.id)}
+                    className={styles.actionButton}
+                  >
+                    💬 {post.comments}
+                  </button>
+                  <button
+                    onClick={() => handleShare(post.id)}
+                    className={styles.actionButton}
+                  >
+                    🔄 {post.shares}
+                  </button>
+                  <button
+                    onClick={() => handleLike(post.id)}
+                    className={styles.actionButton}
+                  >
+                    ❤️ {post.likes}
+                  </button>
                 </div>
               </div>
             </div>

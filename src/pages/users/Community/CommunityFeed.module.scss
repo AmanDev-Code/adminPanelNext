@@ -36,10 +36,17 @@
           align-items: center;
           justify-content: space-between;
   
-          .icon {
+          .iconGroup {
+            display: flex;
+            gap: 10px;
+          }
+  
+          .actionButton {
+            background: transparent;
+            border: none;
             font-size: 1.2rem;
-            color: #6200ea;
             cursor: pointer;
+            color: #6200ea;
   
             &:hover {
               color: #4e00c4;
@@ -110,7 +117,18 @@
             .postActions {
               display: flex;
               gap: 20px;
-              color: #6200ea;
+  
+              .actionButton {
+                background: transparent;
+                border: none;
+                font-size: 1rem;
+                cursor: pointer;
+                color: #6200ea;
+  
+                &:hover {
+                  color: #4e00c4;
+                }
+              }
             }
           }
         }
