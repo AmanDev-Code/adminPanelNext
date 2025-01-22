@@ -20,40 +20,32 @@ const ManageAccount: React.FC = () => {
     }
   };
 
+  const renderInputField = (
+    label: string,
+    value: string,
+    setValue: React.Dispatch<React.SetStateAction<string>>,
+    type: string
+  ) => (
+    <div className={styles.inputWrapper}>
+      <input
+        type={type}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        placeholder=" "
+        className={styles.inputField}
+      />
+      <label className={styles.label}>{label}</label>
+    </div>
+  );
+
   return (
     <div className={styles.container}>
       <h2 className={styles.heading}>Manage Your Account</h2>
 
       <div className={styles.card}>
-        <div className={styles.inputGroup}>
-          <label>Old Password</label>
-          <input
-            type="password"
-            value={oldPassword}
-            onChange={(e) => setOldPassword(e.target.value)}
-            placeholder="Enter old password"
-          />
-        </div>
-
-        <div className={styles.inputGroup}>
-          <label>New Password</label>
-          <input
-            type="password"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-            placeholder="Enter new password"
-          />
-        </div>
-
-        <div className={styles.inputGroup}>
-          <label>Confirm Password</label>
-          <input
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            placeholder="Confirm new password"
-          />
-        </div>
+        {renderInputField("Old Password", oldPassword, setOldPassword, "password")}
+        {renderInputField("New Password", newPassword, setNewPassword, "password")}
+        {renderInputField("Confirm Password", confirmPassword, setConfirmPassword, "password")}
 
         <button className={styles.changeButton} onClick={handlePasswordChange}>
           Change Password
