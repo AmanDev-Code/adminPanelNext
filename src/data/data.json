@@ -361,91 +361,59 @@
     },
     {
       "Step1": {
-        "eventName": "a",
+        "eventName": "aa",
         "eventCategory": "Physical",
-        "endTime": "01:00",
-        "location": "hahah",
-        "description": "aaa"
+        "location": "aa",
+        "description": "dd"
       },
       "Step2": {
-        "bannerImage": "blob:http://localhost:3000/b67dd77a-bf88-4b72-ae3e-f3c0e33f3341"
+        "bannerImage": "blob:http://localhost:3000/75bc1626-f751-4dcf-8841-500623b311a8"
       },
       "Step3": {
         "eventType": "Ticketed Event",
-        "ticketName": "phase ",
-        "ticketPrice": "70000"
+        "ticketName": "Phase 1",
+        "ticketPrice": "222"
       },
       "Step4": {
         "acceptedRequests": [
           {
-            "id": 1,
-            "name": "Ather",
+            "id": 2,
+            "name": "Docker",
             "type": "Sponsors",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRx8FXEAo6hHEDyqZo21qjALhNaODM-gOWYWw&s"
+            "image": "https://tech.osteel.me/images/2020/03/04/docker-introduction-01.jpg",
+            "category": "Platinum"
           },
           {
-            "id": 5,
-            "name": "Vishwas Mudagal",
+            "id": 6,
+            "name": "Rahul Kapoor",
             "type": "Speakers",
-            "image": "https://www.vishwasmudagal.com/wp-content/uploads/2015/03/top-motivational-speaker-vishwas-mudagal.jpg"
-          },
-          {
-            "id": 16,
-            "name": "Aromas of Biryani",
-            "type": "Food",
-            "image": "https://5.imimg.com/data5/SELLER/Default/2020/11/VD/FE/HU/3755768/event-food-catering-services-500x500.jpg"
-          }
-        ]
-      },
-      "eventID": "eAgfin8efm"
-    },
-    {
-      "Step1": {
-        "eventName": "a",
-        "eventCategory": "Physical",
-        "startDate": "2025-01-25",
-        "startTime": "15:28",
-        "endTime": "18:28",
-        "location": "bangalore",
-        "description": "devops event"
-      },
-      "Step2": {
-        "bannerImage": "blob:http://localhost:3000/27979be2-95aa-414f-8d08-e017c40eeaf5"
-      },
-      "Step3": {
-        "eventType": "Free Event",
-        "ticketName": "",
-        "ticketPrice": ""
-      },
-      "Step4": {
-        "acceptedRequests": [
-          {
-            "id": 1,
-            "name": "Ather",
-            "type": "Sponsors",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRx8FXEAo6hHEDyqZo21qjALhNaODM-gOWYWw&s"
-          },
-          {
-            "id": 5,
-            "name": "Vishwas Mudagal",
-            "type": "Speakers",
-            "image": "https://www.vishwasmudagal.com/wp-content/uploads/2015/03/top-motivational-speaker-vishwas-mudagal.jpg"
+            "image": "https://www.rahulkapoor.in/images/top-motivational-speaker-banner-responsive.jpg",
+            "category": "Silver"
           },
           {
             "id": 9,
             "name": "Pai Vista",
             "type": "Venue",
-            "image": "https://floodlightz.com/wp-content/uploads/2024/01/pai-vista-1-1.webp"
+            "image": "https://floodlightz.com/wp-content/uploads/2024/01/pai-vista-1-1.webp",
+            "category": "Gold"
           },
           {
-            "id": 14,
-            "name": "Samosa Party",
+            "id": 15,
+            "name": "Amruth Cafe",
             "type": "Food",
-            "image": "https://hiibangalore.com/wp-content/uploads/2023/06/Best-catering-services-in-Bangalore.jpg"
+            "image": "https://eventsmanagementkerala.com/wp-content/uploads/2024/11/thaliya-new-1024x576.webp",
+            "category": "Bronze"
+          },
+          {
+            "id": 7,
+            "name": "Vivek Bindra",
+            "type": "Speakers",
+            "image": "https://i.pinimg.com/736x/6e/54/21/6e5421d79f810ad7e94666c9b0446868.jpg",
+            "category": "Gold"
           }
         ]
       },
-      "eventID": "zacCbpwkpo"
+      "eventID": "GdyLVgCz2i"
     }
   ]
 }

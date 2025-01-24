@@ -1,0 +1,116 @@
+.dialogHeading {
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.5rem;
+  }
+  
+  .dialogSubheading {
+    text-align: center;
+    color: #777;
+    margin-bottom: 1.5rem;
+  }
+  
+  .dialogContent {
+    overflow-y: visible; // Ensure no clipping during hover
+  }
+  
+  .categoryContainer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  
+  .categoryCard {
+    flex: 1 1 calc(25% - 1.5rem);
+    background-color: #fff;
+    border: 3px solid #e0e0e0;
+    border-radius: 12px;
+    text-align: center;
+    padding: 20px;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  
+    &:hover:not(.disabledCard) {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+  
+    &.activeCard {
+      border-width: 3px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+      background-color: #f5f5f5; // Slightly darker background for active state
+    }
+  
+    &.disabledCard {
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+  
+    .disabledOverlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.8);
+      color: #999;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.2rem;
+      border-radius: 12px;
+    }
+  }
+  
+  .categoryIcon {
+    margin-bottom: 10px;
+    font-size: 2.5rem;
+  }
+  
+  .categoryName {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .categoryDescription {
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
+  .dialogActions {
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .cancelButton {
+    color: #999;
+    font-weight: 600;
+    text-transform: uppercase;
+  
+    &:hover {
+      color: #000;
+    }
+  }
+  
+  .confirmButton {
+    background-color: #4caf50;
+    color: #fff;
+    font-weight: 600;
+    text-transform: uppercase;
+  
+    &:hover {
+      background-color: #45a049;
+    }
+  
+    &:disabled {
+      background-color: #e0e0e0;
+      color: #9e9e9e;
+      cursor: not-allowed;
+    }
+  }
+  

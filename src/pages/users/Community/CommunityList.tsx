@@ -20,39 +20,39 @@ const CommunityList: React.FC = () => {
   ];
 
   const handleCommunityClick = (id: number) => {
-    router.push(`/community`); // Navigate to the community page
+    router.push(`/community`);
   };
 
   const handleCreateCommunity = () => {
-    router.push("/create-community"); // Navigate to the Create Community Page
+    router.push("/create-community");
   };
 
   return (
     <PanelContent headerContent>
-    <div className={styles.communityList}>
-      <h2>My Communities</h2>
-      <div className={styles.communityGrid}>
-        {/* Existing Communities */}
-        {communities.map((community) => (
-          <div
-            key={community.id}
-            className={styles.communityCard}
-            onClick={() => handleCommunityClick(community.id)}
-          >
-            <img src={community.image} alt={community.name} />
-            <p>{community.name}</p>
-          </div>
-        ))}
+      <div className={styles.communityList}>
+        {/* <h2>My Communities</h2> */}
+        <div className={styles.communityGrid}>
+          {/* Existing Communities */}
+          {communities.map((community) => (
+            <div
+              key={community.id}
+              className={styles.communityCard}
+              onClick={() => handleCommunityClick(community.id)}
+            >
+              <img src={community.image} alt={community.name} />
+              <p>{community.name}</p>
+            </div>
+          ))}
 
-        {/* Create Community */}
-        <div
-          className={styles.createCommunityCard}
-          onClick={handleCreateCommunity}
-        >
-          <div className={styles.plusIcon}>+</div>
+          {/* Create Community */}
+          <div
+            className={styles.createCommunityCard}
+            onClick={handleCreateCommunity}
+          >
+            <div className={styles.plusIcon}>+</div>
+          </div>
         </div>
       </div>
-    </div>
     </PanelContent>
   );
 };

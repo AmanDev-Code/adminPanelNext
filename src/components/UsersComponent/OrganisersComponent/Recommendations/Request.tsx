@@ -4,6 +4,8 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import RequestCard from "./RequestCard";
 import { IconButton } from "@mui/material";
 import Profile from "../../UserProfiles/Profile";
+import CategoryDialog from "./CategoryDialog";
+import SummaryDialog from "./SummaryDialog";
 
 interface RequestProps {
   eventId: number;
@@ -118,24 +120,81 @@ const mockData = {
   ],
 };
 
+interface SelectionData {
+  id: string;
+  name: string;
+  type: string;
+  category: string;
+}
+
 const Request: React.FC<RequestProps> = ({ eventId, eventName, onBack }) => {
   const [selectedRequest, setSelectedRequest] = useState<any | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [platinumTaken, setPlatinumTaken] = useState(false); // Restrict Platinum globally
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [summaryDialogOpen, setSummaryDialogOpen] = useState(false);
+  const [selections, setSelections] = useState<{ [key: string]: SelectionData }>({});
+
 
   const handleRequestClick = (request: any, category: string) => {
-    setSelectedRequest(request);
-    setSelectedCategory(category);
+    if (!dialogOpen) {
+      setSelectedRequest(request);
+      setSelectedCategory(category);
+    }
   };
 
-  const handleAccept = (id: number) => {
-    console.log(`Accepted sponsor ${id} for event ${eventId}`);
+  const handleAccept = (id: number, name: string, type: string, category: string) => {
+    const idAsString = id.toString(); // Convert number to string
+    if (category === "Platinum") setPlatinumTaken(true);
+  
+    const newSelection: SelectionData = {
+      id: idAsString,
+      name,
+      type,
+      category,
+    };
+  
+    setSelections((prev) => ({ ...prev, [idAsString]: newSelection }));
   };
+  
+
+  const handleCategoryConfirm = (category: string) => {
+    const selectedItem = mockData[selectedCategory as keyof typeof mockData].find(
+      (item) => item.id === selectedRequest
+    );
+  
+    if (selectedItem) {
+      const fullData = {
+        id: selectedItem.id.toString(),
+        name: selectedItem.name,
+        type: selectedItem.type,
+        category,
+      };
+  
+      if (category === "Platinum") {
+        setPlatinumTaken(true); // Restrict Platinum selection
+      }
+  
+      setSelections((prev) => ({
+        ...prev,
+        [selectedRequest]: fullData, // Store the full data
+      }));
+    }
+  
+    setDialogOpen(false);
+  };
+  
 
   const handleReject = (id: number) => {
-    console.log(`Rejected sponsor ${id} for event ${eventId}`);
+    console.log(`Rejected request with ID: ${id}`);
   };
 
-  if (selectedRequest) {
+  const handleSummaryConfirm = () => {
+    console.log("Final Selections:", selections); // Log final selections
+    setSummaryDialogOpen(false);
+  };
+
+  if (selectedRequest && selectedCategory) {
     return (
       <Profile
         request={selectedRequest}
@@ -155,24 +214,50 @@ const Request: React.FC<RequestProps> = ({ eventId, eventName, onBack }) => {
           <ArrowBackIcon fontSize="large" />
         </IconButton>
       </div>
+
       {Object.entries(mockData).map(([key, value]) => (
         <div key={key} className={styles.section}>
           <h3>{key.charAt(0).toUpperCase() + key.slice(1)}</h3>
           <div className={styles.cardsContainer}>
             {value.map((item) => (
-              <RequestCard
-                key={item.id}
-                name={item.name}
-                type={item.type}
-                image={item.image}
-                onAccept={() => handleAccept(item.id)}
-                onReject={() => handleReject(item.id)}
-                onClick={() => handleRequestClick(item, key)}
-              />
+             <RequestCard
+             key={item.id}
+             name={item.name}
+             type={item.type}
+             image={item.image}
+             onAccept={(category) => handleAccept(item.id, item.name, item.type, category)}
+             onReject={() => handleReject(item.id)}
+             onClick={() => handleRequestClick(item, key)}
+             platinumSelected={platinumTaken}
+           />
             ))}
           </div>
         </div>
       ))}
+
+      <button
+        className={styles.confirmButton}
+        onClick={() => setSummaryDialogOpen(true)}
+        disabled={Object.keys(selections).length === 0} // Disable if no selections
+      >
+        Confirm Selections
+      </button>
+
+      {/* Category Dialog */}
+      <CategoryDialog
+        open={dialogOpen}
+        onClose={() => setDialogOpen(false)}
+        onConfirm={handleCategoryConfirm}
+        platinumSelected={platinumTaken}
+      />
+
+      {/* Summary Dialog */}
+      <SummaryDialog
+        open={summaryDialogOpen}
+        onClose={() => setSummaryDialogOpen(false)}
+        selections={selections}
+        onSubmit={handleSummaryConfirm}
+      />
     </section>
   );
 };

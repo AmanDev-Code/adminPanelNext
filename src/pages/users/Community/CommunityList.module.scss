@@ -1,61 +1,71 @@
 .communityList {
-    padding: 20px;
-    font-family: "Poppins", sans-serif;
-  
-    h2 {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #6200ea;
-      margin-bottom: 20px;
-    }
-  
-    .communityGrid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-  
-      .communityCard,
-      .createCommunityCard {
-        background: #fff;
-        border-radius: 10px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-        cursor: pointer;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-  
-        &:hover {
-          transform: scale(1.05);
-          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-  
-        img {
-          width: 100%;
-          height: 150px;
-          object-fit: cover;
-        }
-  
-        p {
-          text-align: center;
-          padding: 10px;
-          font-size: 1rem;
-          font-weight: 500;
-          color: #333;
-        }
+  padding: 20px;
+  font-family: "Poppins", sans-serif;
+
+  // h2 {
+  //   font-size: 1.5rem;
+  //   font-weight: bold;
+  //   color: #6200ea;
+  //   margin-bottom: 20px;
+  //   text-align: center;
+  // }
+
+  .communityGrid {
+    display: flex; /* Use flexbox for tighter control */
+    // flex-wrap: wrap; /* Allow cards to wrap into the next line */
+    gap: 20px; /* Minimal gap between cards */
+    // justify-content: center; /* Center-align the grid for fewer cards */
+
+    .communityCard,
+    .createCommunityCard {
+      width: 50%; /* Fixed width of 50% */
+      max-width: 250px; /* Optional: Limit card size on large screens */
+      aspect-ratio: 1 / 1; /* Perfect square */
+      position: relative;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      &:hover {
+        transform: scale(1.01);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
       }
-  
-      .createCommunityCard {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: #f9f9f9;
-        border: 2px dashed #6200ea;
-  
-        .plusIcon {
-          font-size: 3rem;
-          font-weight: bold;
-          color: #6200ea;
-        }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Ensures the image fills the square */
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+      }
+
+      p {
+        text-align: center;
+        font-size: 1rem;
+        font-weight: 500;
+        color: #333;
+        margin: 10px 0;
+      }
+    }
+
+    .createCommunityCard {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f9f9f9;
+      border: 2px dashed #6200ea;
+
+      .plusIcon {
+        font-size: 3rem;
+        font-weight: bold;
+        color: #6200ea;
       }
     }
   }
-  
+}

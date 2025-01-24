@@ -117,8 +117,27 @@ interface RequestProps {
 const Request: React.FC<RequestProps> = ({ onAccept }) => {
   const [selectedRequest, setSelectedRequest] = useState<any | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [acceptedRequests, setAcceptedRequests] = useState<{ [key: string]: any[] }>({
+    sponsors: [],
+    speakers: [],
+    venue: [],
+    food: [],
+  });
 
-  const handleAccept = (id: number, name: string, type: string, image: string) => {
+  const handleAccept = (id: number, name: string, type: string, image: string, category: string) => {
+    // Enforce category restrictions
+    if (category === "venue" || category === "food") {
+      if (acceptedRequests[category].length > 0) {
+        alert(`You cannot select more than 1 item in ${category.charAt(0).toUpperCase() + category.slice(1)}.`);
+        return;
+      }
+    }
+
+    // Update accepted requests
+    const updatedCategory = [...acceptedRequests[category], { id, name, type, image }];
+    setAcceptedRequests((prev) => ({ ...prev, [category]: updatedCategory }));
+
+    // Notify parent component
     onAccept({ id, name, type, image });
   };
 
@@ -154,7 +173,8 @@ const Request: React.FC<RequestProps> = ({ onAccept }) => {
                   name={item.name}
                   type={item.type}
                   image={item.image}
-                  onAccept={() => handleAccept(item.id, item.name, item.type, item.image)}
+                  isAccepted={acceptedRequests[key]?.some((req) => req.id === item.id)}
+                  onAccept={() => handleAccept(item.id, item.name, item.type, item.image, key)}
                   onReject={() => console.log(`Rejected request ${item.id}`)}
                   onClick={() => handleRequestClick(item, key)}
                 />

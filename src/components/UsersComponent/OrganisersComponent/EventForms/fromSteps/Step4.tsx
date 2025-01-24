@@ -1,22 +1,39 @@
 import React, { useState, useEffect } from "react";
 import Request from "../fromSteps/RequestForm";
+import CategoryDialog from "../../Recommendations/CategoryDialog";
 
 interface Step4Props {
-  data: string | object;  // Expecting either string or object
+  data: string | object;
   onDataChange: (data: string) => void;
 }
 
 const Step4: React.FC<Step4Props> = ({ data, onDataChange }) => {
   const [acceptedRequests, setAcceptedRequests] = useState<any[]>([]);
+  const [categoryDialogOpen, setCategoryDialogOpen] = useState(false);
+  const [selectedRequest, setSelectedRequest] = useState<any>(null);
+  const [platinumSelected, setPlatinumSelected] = useState(false);
 
   const handleAcceptRequest = (requestData: any) => {
-    const updatedRequests = [...acceptedRequests, requestData];
+    setSelectedRequest(requestData);
+    setCategoryDialogOpen(true);
+  };
+
+  const handleCategoryConfirm = (category: string) => {
+    const updatedRequest = { ...selectedRequest, category };
+    const updatedRequests = [...acceptedRequests, updatedRequest];
     setAcceptedRequests(updatedRequests);
 
-    // Check if data is a string and parse it, else use it directly
+    // Update platinum status
+    if (category === "Platinum") setPlatinumSelected(true);
+
+    // Close the category dialog and reset selection
+    setCategoryDialogOpen(false);
+    setSelectedRequest(null);
+
+    // Update parent data
     const existingData = typeof data === "string" ? JSON.parse(data) : data;
     const updatedData = { ...existingData, acceptedRequests: updatedRequests };
-    onDataChange(updatedData); // Pass the updated object directly
+    onDataChange(updatedData);
   };
 
   useEffect(() => {
@@ -26,15 +43,14 @@ const Step4: React.FC<Step4Props> = ({ data, onDataChange }) => {
   return (
     <div>
       <Request onAccept={handleAcceptRequest} />
-      <div>
-        <ul>
-          {acceptedRequests.map((request, index) => (
-            <li key={index}>
-              {request.name} ({request.type})
-            </li>
-          ))}
-        </ul>
-      </div>
+
+      {/* Category Dialog */}
+      <CategoryDialog
+        open={categoryDialogOpen}
+        onClose={() => setCategoryDialogOpen(false)}
+        onConfirm={handleCategoryConfirm}
+        platinumSelected={platinumSelected}
+      />
     </div>
   );
 };

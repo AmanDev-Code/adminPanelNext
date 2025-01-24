@@ -5,20 +5,27 @@ import Step2 from "./fromSteps/Step2";
 import Step3 from "./fromSteps/Step3";
 import Step4 from "./fromSteps/Step4";
 import Step5 from "./fromSteps/Step5";
+import SummaryDialog from "../Recommendations/SummaryDialog";
 import styles from "../../OrganisersStyles/EventFormsStyles/ProgressBar.module.scss";
 
 interface ProgressBarProps {
   steps: string[];
   setActiveTab: React.Dispatch<
-    React.SetStateAction<"Ongoing" | "Previous Events" | "Request" | "Recommendation" | "Create an Events">
+    React.SetStateAction<
+      | "Ongoing"
+      | "Previous Events"
+      | "Request"
+      | "Recommendation"
+      | "Create an Events"
+    >
   >;
 }
-
 
 const ProgressBar: React.FC<ProgressBarProps> = ({ steps, setActiveTab }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState<Record<string, any>>({});
   const [isSubmitted, setIsSubmitted] = useState(false); // Track submission
+  const [isSummaryDialogOpen, setIsSummaryDialogOpen] = useState(false);
 
   useEffect(() => {
     updateProgressLine();
@@ -27,7 +34,9 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ steps, setActiveTab }) => {
   const updateProgressLine = () => {
     const totalSteps = steps.length - 1; // Total steps minus 1 to calculate percentage
     const progressPercentage = (currentStep / totalSteps) * 100;
-    const progressBarLine = document.querySelector(`.${styles.line}`) as HTMLElement;
+    const progressBarLine = document.querySelector(
+      `.${styles.line}`
+    ) as HTMLElement;
 
     if (progressBarLine) {
       progressBarLine.style.width = `${progressPercentage}%`;
@@ -35,6 +44,11 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ steps, setActiveTab }) => {
   };
 
   const handleNext = () => {
+    if (currentStep === 3) {
+      // Open SummaryDialog for Step 4
+      setIsSummaryDialogOpen(true);
+      return;
+    }
     if (currentStep < steps.length - 1) {
       setCurrentStep((prev) => prev + 1);
     }
@@ -53,22 +67,27 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ steps, setActiveTab }) => {
     }));
   };
 
+  const handleSummaryConfirm = () => {
+    setIsSummaryDialogOpen(false);
+    setCurrentStep((prev) => prev + 1); // Move to Step 5
+  };
+
   const handleSubmit = async () => {
     try {
-      const response = await fetch('/api/save-data', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("/api/save-data", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData), // Send the formData to the API
       });
-  
-      if (!response.ok) throw new Error('Failed to save data.');
-  
+
+      if (!response.ok) throw new Error("Failed to save data.");
+
       const result = await response.json();
-      console.log('Event added successfully with eventID:', result.eventID);
-  
+      console.log("Event added successfully with eventID:", result.eventID);
+
       setActiveTab("Ongoing"); // Switch to Ongoing tab after submission
     } catch (error) {
-      console.error('Error saving data:', error);
+      console.error("Error saving data:", error);
     }
   };
 
@@ -153,10 +172,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ steps, setActiveTab }) => {
               Previous
             </button>
             {currentStep === steps.length - 1 ? (
-              <button
-              onClick={handleSubmit}
-                className={styles.StepButton}
-              >
+              <button onClick={handleSubmit} className={styles.StepButton}>
                 Submit
               </button>
             ) : (
@@ -167,6 +183,16 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ steps, setActiveTab }) => {
           </div>
         </div>
       </div>
+
+      {/* Summary Dialog for Step 4 */}
+      {currentStep === 3 && (
+        <SummaryDialog
+          open={isSummaryDialogOpen}
+          onClose={() => setIsSummaryDialogOpen(false)}
+          selections={formData["Step4"]?.acceptedRequests || []}
+          onSubmit={handleSummaryConfirm}
+        />
+      )}
     </section>
   );
 };

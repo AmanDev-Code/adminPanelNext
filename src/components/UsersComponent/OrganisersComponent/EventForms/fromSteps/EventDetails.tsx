@@ -7,35 +7,29 @@ interface EventDetailsProps {
 }
 
 const EventDetails: React.FC<EventDetailsProps> = ({ data, onDataChange }) => {
-  // Parse the data safely with a fallback to an empty object
-  console.log(data)
   let eventData = {};
   try {
     eventData = JSON.parse(data);
   } catch (error) {
     console.error("Invalid JSON data passed to EventDetails:", error);
-    eventData = {
-      name: "Unknown Event",
-      eventType: "N/A",
-      price: "N/A",
-      date: "N/A",
-      startTime: "N/A",
-      endTime: "N/A",
-      venueLocation: "N/A",
-      mapImage: "",
-      organizerImage: "",
-      organizerName: "Unknown Organizer",
-      speakerImage: "",
-      speakerName: "Unknown Speaker",
-      sponsorImage: "",
-      sponsorName: "Unknown Sponsor",
-      venueImage: "",
-      venueName: "Unknown Venue",
-      foodImage: "",
-      foodName: "Unknown Food",
-      description: "No description available.",
-    };
+    eventData = {};
   }
+
+  const renderList = (items: { name: string; image: string }[], title: string) => (
+    <div className={styles.card}>
+      <h3 className={styles.sectionHeading}>{title}</h3>
+      <div className={styles.gridContainer}>
+        {items.map((item, index) => (
+          <div key={index} className={styles.gridItem}>
+            <div className={styles.inlineInfo}>
+              <img src={item.image || ""} alt={item.name} className={styles.profileImage} />
+              <span className={styles.inlineText}>{item.name}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 
   return (
     <div className={styles.container}>
@@ -78,65 +72,11 @@ const EventDetails: React.FC<EventDetailsProps> = ({ data, onDataChange }) => {
         />
       </div>
 
-      {/* Card 3: Organizer, Speaker, Sponsor */}
-      <div className={styles.card}>
-        <h3 className={styles.sectionHeading}>Organizer</h3>
-        <div className={styles.inlineInfo}>
-          <img
-            src={(eventData as any).organizerImage || ""}
-            alt="Organizer"
-            className={styles.profileImage}
-          />
-          <span className={styles.inlineText}>{(eventData as any).organizerName}</span>
-        </div>
-
-        <div className={styles.gridContainer}>
-          <div className={styles.gridItem}>
-            <h3 className={styles.sectionHeading}>Speaker</h3>
-            <div className={styles.inlineInfo}>
-              <img
-                src={(eventData as any).speakerImage || ""}
-                alt="Speaker"
-                className={styles.profileImage}
-              />
-              <span className={styles.inlineText}>{(eventData as any).speakerName}</span>
-            </div>
-          </div>
-          <div className={styles.gridItem}>
-            <h3 className={styles.sectionHeading}>Sponsor</h3>
-            <div className={styles.inlineInfo}>
-              <img
-                src={(eventData as any).sponsorImage || ""}
-                alt="Sponsor"
-                className={styles.profileImage}
-              />
-              <span className={styles.inlineText}>{(eventData as any).sponsorName}</span>
-            </div>
-          </div>
-          <div className={styles.gridItem}>
-            <h3 className={styles.sectionHeading}>Venue</h3>
-            <div className={styles.inlineInfo}>
-              <img
-                src={(eventData as any).venueImage || ""}
-                alt="Venue"
-                className={styles.profileImage}
-              />
-              <span className={styles.inlineText}>{(eventData as any).venueName}</span>
-            </div>
-          </div>
-          <div className={styles.gridItem}>
-            <h3 className={styles.sectionHeading}>Food</h3>
-            <div className={styles.inlineInfo}>
-              <img
-                src={(eventData as any).foodImage || ""}
-                alt="Food"
-                className={styles.profileImage}
-              />
-              <span className={styles.inlineText}>{(eventData as any).foodName}</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* Card 3: Speakers, Sponsors, Venues, Food */}
+      {renderList((eventData as any).speakers || [], "Speakers")}
+      {renderList((eventData as any).sponsors || [], "Sponsors")}
+      {renderList((eventData as any).venues || [], "Venues")}
+      {renderList((eventData as any).foods || [], "Foods")}
 
       {/* Card 4: Event Description */}
       <div className={styles.card}>

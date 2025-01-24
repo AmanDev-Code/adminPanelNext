@@ -1,90 +1,111 @@
 .card {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px;
-    background: #fff;
-    border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    margin: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  // margin: 10px 0;
+  // height: auto; /* Ensure consistent height */
+  // min-height: 100px; /* Set a minimum height to avoid shrinking */
+}
+
+.card:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.innerFlex {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 15px;
+}
+
+.imageContainer {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.imageContainer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.detailsFlex {
+  flex: 1;
+}
+
+.detailsFlex p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+.buttonsFlex {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 100px; /* Reduced the button section width */
+}
+
+/* Accept Button */
+.acceptButton {
+  padding: 6px 12px; /* Reduced padding for smaller button */
+  border: none;
+  border-radius: 8px; /* Slightly smaller radius */
+  background: #4b0082;
+  color: #fff;
+  font-size: 13px; /* Reduced font size */
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.acceptButton:hover {
+  background: #45009d;
+  transform: scale(1.05);
+}
+
+/* Reject Button */
+.rejectButton {
+  padding: 6px 12px; /* Reduced padding for smaller button */
+  border: 1px solid #f44336;
+  border-radius: 8px; /* Slightly smaller radius */
+  background: #fff;
+  color: #f44336;
+  font-size: 13px; /* Reduced font size */
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.rejectButton:hover {
+  background: #f44336;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+/* Added Button */
+.addedButton {
+  padding: 6px 6px; /* Reduced padding for smaller button */
+  border: none;
+  border-radius: 8px; /* Slightly smaller radius */
+  background: #28a745;
+  color: #fff;
+  font-size: 13px; /* Reduced font size */
+  font-weight: bold;
+  cursor: not-allowed;
+  transition: background 0.3s ease, transform 0.2s ease;
+
+  &:hover {
+    background: #218838;
+    transform: scale(1.02);
   }
-  
-  .card:hover {
-    // transform: scale(1.02);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  }
-  
-  .innerFlex {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    gap: 15px;
-  }
-  
-  .imageContainer {
-    flex-shrink: 0;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    overflow: hidden;
-  }
-  
-  .imageContainer img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .detailsFlex {
-    flex: 1;
-  }
-  
-  .detailsFlex p {
-    margin: 0;
-    font-size: 16px;
-    font-weight: 500;
-    color: #333;
-  }
-  
-  .buttonsFlex {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .acceptButton {
-    padding: 8px 15px;
-    border: none;
-    border-radius: 10px;
-    background: #4b0082;
-    color: #fff;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
-  }
-  
-  .acceptButton:hover {
-    background: #45009d;
-    transform: scale(1.05);
-  }
-  
-  .rejectButton {
-    padding: 8px 15px;
-    border: 1px solid #f44336;
-    border-radius: 10px;
-    background: #fff;
-    color: #f44336;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: color 0.3s ease, transform 0.2s ease;
-  }
-  
-  .rejectButton:hover {
-    background: #f44336;
-    color: #fff;
-    transform: scale(1.05);
-  }
-  
+}
